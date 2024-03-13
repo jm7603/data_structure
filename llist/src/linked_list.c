@@ -198,4 +198,57 @@ ListStatusCode ListInsert(LinkedList *list, int32_t index, bool fill, void *data
   return LS_OK;
 }
 
+ListStatusCode ListRemove(LinkedList *list, int32_t index) {
+  if (!list) return LS_ERR;
+  if (ListIsEmpty(list)) return LS_EMPTY;
+  if (index < 0 || index > list->length) return LS_ERR_INDEX;
+
+  // 当链表中只有最后一个元素时
+  if (list->length == 1) {
+    RemoveTheLastElem(list);
+    return LS_OK;
+  }
+
+  // 头尾
+  if (index == 0) {
+    ListPopFront(list);
+    return LS_OK;
+  }
+
+  if (index == list->length - 1) {
+    ListPopBack(list);
+    return LS_OK;
+  }
+
+  ListNode *cur = list->head;
+  for (int i = 0; i < index; ++i) cur = cur->next;
+  cur->next->prev = cur->prev;
+  cur->prev->next = cur->next;
+  DestroyListNode(cur);
+  return LS_OK;
+}
+
+ListStatusCode ListUpdate(LinkedList *list, int32_t index, void *data) {
+  if (!list) return LS_ERR;
+  if (ListIsEmpty(list)) return LS_EMPTY;
+  if (index < 0 || index > list->length) return LS_ERR_INDEX;
+
+  ListNode *cur = list->head;
+  for (int i = 0; i < index; ++i) cur = cur->next;
+  if (cur->data) free(cur->data);
+  cur->data = data;
+  return LS_OK;
+}
+
+ListStatusCode ListGetElem(LinkedList *list, int32_t index, void **res) {
+  if (!list) return LS_ERR;
+  if (ListIsEmpty(list)) return LS_EMPTY;
+  if (index < 0 || index > list->length) return LS_ERR_INDEX;
+
+  ListNode *cur = list->head;
+  for (int i = 0; i < index; ++i) cur = cur->next;
+  *res = cur->data;
+  return LS_OK;
+}
+
 

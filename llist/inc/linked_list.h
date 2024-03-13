@@ -44,10 +44,9 @@ ListStatusCode ListPopFront(LinkedList *list);
  */
 ListStatusCode ListInsert(LinkedList *list, int32_t index, bool fill, void *data);
 
-// TODO: 待完成函数
 ListStatusCode ListRemove(LinkedList *list, int32_t index);
 
-ListStatusCode ListUpdate(LinkedList *list, int32_t index);
+ListStatusCode ListUpdate(LinkedList *list, int32_t index, void *data);
 
 ListStatusCode ListGetElem(LinkedList *list, int32_t index, void **res);
 
