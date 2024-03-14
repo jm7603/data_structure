@@ -6,6 +6,7 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_subdirectory(llist)
+add_subdirectory(lstack)
 
 file(GLOB test_dir_list "${CMAKE_CURRENT_SOURCE_DIR}/test/*")
 foreach (dir_path ${test_dir_list})
