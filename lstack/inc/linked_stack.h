@@ -10,14 +10,16 @@
 #include <stdlib.h>
 
 #define DEFAULT_CAPACITY 20
+#define DEFAULT_ELEM_SIZE 8
 
 typedef struct LinkedStack {
   LinkedList *container;
   size_t capacity;
   size_t size;
+  size_t n_size;
 } LinkedStack;
 
-LinkedStack *CreateLinkedStack(size_t capacity);
+LinkedStack *CreateLinkedStack(size_t capacity, size_t n_size);
 
 void DestroyLinkedStack(LinkedStack *stack);
 
